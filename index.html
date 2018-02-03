@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Rock Paper Scissors</title>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+	<div class="row jumbotron">
+		<h1>Rock Paper Scissors</h1>
+		<div class="col-md-4">
+			<p id="str"></p>
+		</div>
+	</div>
+<div class="row">
+	<div class="col-sm-4 form-group">
+		<select id="rps" class="form-control">
+			<option value="0">Rock</option>
+			<option value="1">Paper</option>
+			<option value="2">Scissors</option>
+			<option value="3">Test</option>
+		</select><br>
+		<input class="btn btn-success" type="submit" onclick="check()" value="Play">
+	</div>	
+</div>
+	<script type="text/javascript">
+		var score=0;
+		var plays=1;
+		function check(){
+			var x = Math.random()*3; // random number between 0 - 3 float
+			var x = Math.floor(x);
+			var y = document.getElementById('rps').value;
+			if(y==3){
+				playcheck();
+			}else{
+				play(x,y);
+				++plays;
+			}
+		}
+		function play(x,y){ 
+			var element=['Rock','Paper','Scissors']
+			if(x==y){
+					document.getElementById('str').innerHTML="<h2 class='text-primary'>Tie</h2>"+"<br><h4>Score : "+score+"<br>Plays : "+plays+"</h4><br>You Selected : "+element[y]+"<br>Computer Selected : "+element[x];
+				return "<h2 class='text-warning'>Tie</h2>"+"You Selected : "+element[y]+"<br>Computer Selected : "+element[x];
+			}
+			else if(x<y){
+				if(x==0 && y == 2){
+					document.getElementById('str').innerHTML="<h2 class='text-danger'>You Lose</h2>"+"<br><h4>Score : "+score+"<br>Plays : "+plays+"</h4><br>You Selected : "+element[y]+"<br>Computer Selected : "+element[x];
+					return "<h2 class='text-danger'>You Lose</h2>"+"You Selected : "+element[y]+"<br>Computer Selected : "+element[x];
+				}
+				else{
+					++score;
+					document.getElementById('str').innerHTML="<h2 class='text-success'>You Win</h2>"+"<br><h4>Score : "+score+"<br>Plays : "+plays+"</h4><br>You Selected : "+element[y]+"<br>Computer Selected : "+element[x];
+					return "<h2 class='text-success'>You Win</h2>"+"You Selected : "+element[y]+"<br>Computer Selected : "+element[x];
+				}
+			}
+			else if(x>y){
+				if(x == 2 && y == 0){
+					++score;
+					document.getElementById('str').innerHTML="<h2 class='text-success'>You Win</h2>"+"<br><h4>Score : "+score+"<br>Plays : "+plays+"</h4><br>You Selected : "+element[y]+"<br>Computer Selected : "+element[x];
+					return "<h2>You Win</h2>"+"You Selected : "+element[y]+"<br>Computer Selected : "+element[x];
+				}
+				else{
+					document.getElementById('str').innerHTML="<h2 class='text-danger'>You Lose</h2>"+"<br><h4>Score : "+score+"<br>Plays : "+plays+"</h4><br>You Selected : "+element[y]+"<br>Computer Selected : "+element[x];
+					return "<h2>You Lose</h2>"+"You Selected : "+element[y]+"<br>Computer Selected : "+element[x];
+				}
+			}
+		}
+		var data=[];
+		function playcheck(){
+		var k=0;
+			for(i=0;i<3;i++){
+				for(j=0;j<3;j++){
+					data[k]=play(i,j);
+					k++;
+				}
+			}
+			document.write(data);
+		}
+	</script>
+</div>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</body>
+</html>
